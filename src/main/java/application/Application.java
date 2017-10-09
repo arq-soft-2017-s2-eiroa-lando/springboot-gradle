@@ -1,7 +1,8 @@
 package application;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,47 +12,39 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import application.model.Student;
 import application.model.Subject;
+import application.persistence.StudentRepository;
 import application.persistence.SubjectRepository;
 
 @SpringBootApplication
 public class Application {
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
-	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class);
 	}
 
 	@Bean
-	public CommandLineRunner demo(SubjectRepository repository) {
+	public CommandLineRunner demo(SubjectRepository subjRepo, StudentRepository studRepo) {
 		return (args) -> {
 
-			repository.save(new Subject("Intro"));
-			repository.save(new Subject("Matematica 1"));
-			repository.save(new Subject("Orga"));
-			repository.save(new Subject("Ingles 1"));
-			repository.save(new Subject("Objetos 1"));
+			List<Subject> subjects = new ArrayList<Subject>();
+			
+			Subject s1 = new Subject("Introduccion a la programacion", true, false);
+			Subject s2 = new Subject("Matematica 1", false, false);
+			Subject s3 = new Subject("Organizacion y arquitectura de computadoras", false, false);
+			Subject s4 = new Subject("Ingles 1", false, false);
+			Subject s5 = new Subject("Objetos 1", false, false);
+			
+			subjects.add(s1);subjects.add(s2);subjects.add(s3);subjects.add(s4);subjects.add(s5); 
 
-			log.info("Subjects found with findAll():");
-			log.info("-------------------------------");
-			for (Subject s : repository.findAll()) {
-				log.info(s.getName());
+			for(Subject s : subjects){
+				subjRepo.save(s);
 			}
-			log.info("");
-
-			Subject s = repository.findOne(1L);
-			log.info("Subject found with findOne(1L):");
-			log.info("--------------------------------");
-			log.info(s.getName());
-			log.info("");
-
-			log.info("Subject found with findByName('Orga'):");
-			log.info("--------------------------------------------");
-			for (Subject su : repository.findByName("Orga")) {
-				log.info(su.toString());
-			}
-			log.info("");
+			
+			Student s = new Student("Lucas", 1);
+			s.getSubjects().addAll(subjects);
+			studRepo.save(s);
 		};
 	}
 	
@@ -62,7 +55,7 @@ public class Application {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:4200")
+                    .allowedOrigins("*")
                     .allowedMethods("PUT", "DELETE", "GET", "POST")
                     .allowCredentials(false).maxAge(3600);
             }
