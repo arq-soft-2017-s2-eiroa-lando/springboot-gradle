@@ -24,6 +24,6 @@ class SubjectController {
     @RequestMapping(value = "/example", method = arrayOf(RequestMethod.GET), produces = arrayOf("application/json"))
     @ResponseBody
     fun example(): Subject {
-        return Subject("orga")
+        return Subject("TIP",false,false)
     }
 }
