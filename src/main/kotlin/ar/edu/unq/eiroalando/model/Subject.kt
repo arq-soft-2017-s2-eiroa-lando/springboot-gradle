@@ -6,7 +6,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class Subject( var name: String, var approved: Boolean,var subscribed: Boolean ):Comparable<Subject> {
+class Subject( var name: String ):Comparable<Subject> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null

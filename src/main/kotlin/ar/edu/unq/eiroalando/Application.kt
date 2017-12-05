@@ -1,8 +1,8 @@
 package ar.edu.unq.eiroalando
 
-import ar.edu.unq.eiroalando.model.Student
 import ar.edu.unq.eiroalando.model.Subject
-import ar.edu.unq.eiroalando.persistence.StudentRepository
+import ar.edu.unq.eiroalando.model.User
+import ar.edu.unq.eiroalando.persistence.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
@@ -20,17 +20,17 @@ open class Application {
 
 
     @Bean
-    open fun init(subjectRepository: SubjectRepository, studentRepository: StudentRepository) = CommandLineRunner {
+    open fun init(subjectRepository: SubjectRepository, studentRepository: UserRepository) = CommandLineRunner {
 
-        val s1 = Subject("Intro",true,false)
-        val s2 = Subject("Matematica 1",false,false)
-        val s3 = Subject("Orga",false,false)
-        val s4 = Subject("Ingles 1",false,false)
-        val s5 = Subject("Objetos 1",false,false)
+        val s1 = Subject("Intro")
+        val s2 = Subject("Matematica 1")
+        val s3 = Subject("Orga")
+        val s4 = Subject("Ingles 1")
+        val s5 = Subject("Objetos 1")
 
         val allSubjects = listOf<Subject>(s1,s2,s3,s4,s5)
 
-        var lucas  =  Student("Lucas",1)
+        var lucas  =  User.createStudent("Lucas",1)
 
         allSubjects.forEach { sub -> subjectRepository.save(sub) }
 
