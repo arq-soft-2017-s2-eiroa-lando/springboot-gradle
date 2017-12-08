@@ -80,6 +80,9 @@ public class StudentSurvey {
         return saltStr;
 
     }
+	public Subject getSubject(int subID) {
+		return this.subjects.stream().filter(s -> s.getId() == subID).findFirst().get();
+	}
 	
 	
 }

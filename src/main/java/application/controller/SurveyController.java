@@ -1,5 +1,7 @@
 package application.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import application.controller.dto.Answer;
 import application.model.StudentSurvey;
 import application.model.Survey;
 import application.service.SurveyService;
@@ -41,5 +44,8 @@ public class SurveyController {
 		service.save(s);
 	}
     	 
-	
+	@PostMapping(value="answer/{surveyHash}" , consumes="application/json")
+	public @ResponseBody void newSurvey(@PathVariable("surveyHash") int surveyHash , @RequestBody List<Answer> answers) {
+		service.saveAnswer(surveyHash, answers);
+	}
 }

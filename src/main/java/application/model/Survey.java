@@ -78,4 +78,10 @@ public class Survey {
 
 	public Survey() {}
 
+	public void setIncrementCompletedSurveys() {
+		synchronized(Survey.class) {
+			this.completedSurveys ++;
+		}
+	}
+
 }

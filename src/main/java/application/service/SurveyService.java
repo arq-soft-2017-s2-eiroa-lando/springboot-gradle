@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import application.controller.dto.Answer;
 import application.model.StudentSurvey;
 import application.model.Subject;
 import application.model.Survey;
@@ -59,5 +60,19 @@ public class SurveyService {
 
 	public StudentSurvey findStudentSurvey(int surveyHash) {
 		return studentR.findBySurveyHash(surveyHash);
+	}
+
+	public void saveAnswer(int surveyHash, List<Answer> answers) {
+		StudentSurvey survey = findStudentSurvey(surveyHash);
+		for(Answer a : answers) {
+			Subject s = survey.getSubject(a.getId());
+			s.setOptionChosen(a.getOption());
+		}
+		
+		studentR.save(survey);
+		
+		Survey s = this.find();
+		s.setIncrementCompletedSurveys();
+		surveyR.save(s);
 	}
 }
