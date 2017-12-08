@@ -1,5 +1,6 @@
 package application.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,8 +20,17 @@ public class Subject {
 	private Long id;
 	private String name;
 	@OneToMany(cascade= {CascadeType.ALL}) private List<SubjectClass> classes;
-	@ElementCollection @Column(name="questions") private List<String> questions;
+	@ElementCollection @Column(name="options") private List<String> options;
+	private String optionChosen;
 	
+	public String getOptionChosen() {
+		return optionChosen;
+	}
+
+	public void setOptionChosen(String optionChosen) {
+		this.optionChosen = optionChosen;
+	}
+
 	protected Subject(){}
 
 	public Long getId() {
@@ -47,20 +57,41 @@ public class Subject {
 		this.classes = classes;
 	}
 
-	public List<String> getQuestions() {
-		return questions;
+	public List<String> getOptions() {
+		return options;
 	}
 
-	public void setQuestions(List<String> questions) {
-		this.questions = questions;
+	public void setOptions(List<String> options) {
+		this.options = options;
 	}
 
-	public Subject(Long id, String name, List<SubjectClass> classes, List<String> questions) {
-		super();
-		this.id = id;
+	public Subject(String name, List<SubjectClass> classes, List<String> options, String optionChosen) {
 		this.name = name;
 		this.classes = classes;
-		this.questions = questions;
-	};
+		this.options = options;
+		this.optionChosen = optionChosen;
+	}
+
+	public Subject cloneSubject() {
+		return new Subject(name, cloneClasses(), cloneOptions(), optionChosen);
+	}
+
+	private List<String> cloneOptions() {
+		List<String> list = new ArrayList<String>();
+		list.addAll(options);
+		return list;
+	}
+
+	private List<SubjectClass> cloneClasses() {
+		List<SubjectClass> list = new ArrayList<SubjectClass>();
+		for(SubjectClass sc : classes) {
+			list.add(sc.cloneClass());
+		}
+		return list;
+	}
+	
+	
+
+	
 	
 }

@@ -1,5 +1,6 @@
 package application.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,9 +19,7 @@ public class SubjectClass {
 	private String name;
 	private String teachers;
 	private int size;	
-	@ElementCollection
-	@Column(name="schedule")
-	private List<String> schedules;
+	@ElementCollection @Column(name="schedule") private List<String> schedules;
 	
 	public Long getId() {
 		return id;
@@ -65,13 +64,23 @@ public class SubjectClass {
 
 	public SubjectClass() {}
 
-	public SubjectClass(Long id, String name, String teachers, int size, List<String> schedules) {
-		super();
-		this.id = id;
+	public SubjectClass(String name, String teachers, int size, List<String> schedules) {
 		this.name = name;
 		this.teachers = teachers;
 		this.size = size;
 		this.schedules = schedules;
 	}
+
+	public SubjectClass cloneClass() {
+		return new SubjectClass(name, teachers, size, cloneSchedules());
+	}
+
+	private List<String> cloneSchedules() {
+		List<String> list = new ArrayList<String>();
+		list.addAll(schedules);
+		return list;
+	}
+	
+	
 	
 }

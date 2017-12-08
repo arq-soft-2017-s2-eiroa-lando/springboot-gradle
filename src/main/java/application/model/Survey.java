@@ -16,6 +16,33 @@ public class Survey {
 	private String period;
 	private String comment;
 	@OneToMany(cascade= {CascadeType.ALL}) private List<Subject> subjects;
+	private String emails;
+	private int completedSurveys;
+	private int totalSurveys;
+	
+	public String getEmails() {
+		return emails;
+	}
+
+	public void setEmails(String emails) {
+		this.emails = emails;
+	}
+
+	public int getTotalSurveys() {
+		return totalSurveys;
+	}
+
+	public void setTotalSurveys(int totalSurveys) {
+		this.totalSurveys = totalSurveys;
+	}
+
+	public int getCompletedSurveys() {
+		return completedSurveys;
+	}
+
+	public void setCompletedSurveys(int completedSurveys) {
+		this.completedSurveys = completedSurveys;
+	}
 
 	public Long getId() {
 		return id;
@@ -49,15 +76,6 @@ public class Survey {
 		this.subjects = subjects;
 	}
 
-	public Survey(Long id, String period, String comment, List<Subject> subjects) {
-		super();
-		this.id = id;
-		this.period = period;
-		this.comment = comment;
-		this.subjects = subjects;
-	}
-	
-	public Survey() {};
-	
- 	
+	public Survey() {}
+
 }
