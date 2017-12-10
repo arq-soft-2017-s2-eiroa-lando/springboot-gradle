@@ -10,9 +10,5 @@ interface UserRepository :CrudRepository<User,Long> {
 
     fun findByStudentFileNumber(fileNumber: Int?): User
 
-    fun findStudents():List<User>
-
-    fun findProfessors():List<User>
-
-    fun findDirectors():List<User>
+    fun findByIsStudent(isStudent:Boolean): List<User>
 }

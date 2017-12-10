@@ -21,8 +21,13 @@ class StudentController {
     lateinit var studService: UserService
 
     @GetMapping(value = "/{fileNumber}")
-    fun getStudentByFileNumber(@PathVariable fileNumber: Int?): User {
-        return studService!!.getStudentByFileNumber(1)
+    fun getStudentByFileNumber(@PathVariable fileNumber: Int): User {
+        return studService!!.getStudentByFileNumber(fileNumber)
+    }
+
+    @GetMapping(value = "/all")
+    fun getAllStudents(): List<User>? {
+        return studService.findStudents()?.toList()
     }
 
     @PostMapping(value = "/subscribe/{fileNumber}", consumes = arrayOf("application/json"))

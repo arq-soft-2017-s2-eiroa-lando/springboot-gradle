@@ -21,4 +21,6 @@ class UserService {
     fun save(s: User) {
         studRepo!!.save(s)
     }
+
+    fun findStudents(): MutableIterable<User>? { return studRepo.findAll()}
 }

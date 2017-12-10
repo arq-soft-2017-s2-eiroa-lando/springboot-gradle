@@ -32,11 +32,14 @@ open class Application {
 
         var lucas  =  User.createStudent("Lucas",1)
 
+        var pepe  =  User.createStudent("Pepe",2)
+
         allSubjects.forEach { sub -> subjectRepository.save(sub) }
 
         lucas.subjects.addAll(allSubjects)
 
         studentRepository.save(lucas)
+        studentRepository.save(pepe)
 
         log.info(" ===========  Initial Data Loaded ===========")
     }
