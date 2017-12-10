@@ -19,7 +19,14 @@ public class StudentSurvey {
 	private String period;
 	private String comment;
 	@OneToMany(cascade= {CascadeType.ALL}) private List<Subject> subjects;
+	private boolean completed;
 	
+	public boolean isCompleted() {
+		return completed;
+	}
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
 	public int getSurveyHash() {
 		return surveyHash;
 	}

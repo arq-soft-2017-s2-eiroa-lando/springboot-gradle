@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import application.controller.dto.Answer;
 import application.model.StudentSurvey;
 import application.model.Survey;
+import application.model.SurveyStatistics;
 import application.service.SurveyService;
 
 @RestController
@@ -45,7 +46,15 @@ public class SurveyController {
 	}
     	 
 	@PostMapping(value="answer/{surveyHash}" , consumes="application/json")
-	public @ResponseBody void newSurvey(@PathVariable("surveyHash") int surveyHash , @RequestBody List<Answer> answers) {
+	public @ResponseBody void saveAnswer(@PathVariable("surveyHash") int surveyHash , @RequestBody List<Answer> answers) {
 		service.saveAnswer(surveyHash, answers);
+	}
+	
+	@GetMapping(value="statistics", produces="application/json")
+	public SurveyStatistics getStatistics() {
+		Survey s = this.getCurrentSurvey();
+		Iterable<StudentSurvey> answers = this.getStudentSurveys();
+		
+		return new SurveyStatistics(s, answers);
 	}
 }

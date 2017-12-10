@@ -68,7 +68,7 @@ public class SurveyService {
 			Subject s = survey.getSubject(a.getId());
 			s.setOptionChosen(a.getOption());
 		}
-		
+		survey.setCompleted(true);
 		studentR.save(survey);
 		
 		Survey s = this.find();
