@@ -33,14 +33,22 @@ class StudentController {
     @PostMapping(value = "/subscribe/{fileNumber}", consumes = arrayOf("application/json"))
     fun subscribe(@RequestBody subject: Subject, @PathVariable fileNumber: Int?) {
         val st = studService!!.getStudentByFileNumber(fileNumber!!)
-        //st.subjects?.single { s -> s.name.equals(subject.name) }?.subscribed = true
         studService!!.save(st)
+    }
+
+    @PostMapping(value = "/add", consumes = arrayOf("application/json"))
+    fun register(@RequestBody student: User) {
+        studService.save(student)
+    }
+
+    @PostMapping(value = "/update", consumes = arrayOf("application/json"))
+    fun update(@RequestBody student: User) {
+        studService.update(student)
     }
 
     @PostMapping(value = "/unsubscribe/{fileNumber}", consumes = arrayOf("application/json"))
     fun unsubscribe(@RequestBody subject: Subject, @PathVariable fileNumber: Int?) {
         val st = studService!!.getStudentByFileNumber(fileNumber!!)
-        //st.subjects?.single{ s -> s.name.equals(subject.name)}?.subscribed = false
         studService!!.save(st)
     }
 

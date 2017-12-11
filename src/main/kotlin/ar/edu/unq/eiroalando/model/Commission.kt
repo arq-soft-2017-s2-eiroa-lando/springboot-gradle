@@ -3,10 +3,10 @@ package ar.edu.unq.eiroalando.model
 import javax.persistence.*
 
 @Entity
-class Commision(var name: String,
-                var year: Int,
-                var semester: Int,
-                var classTime: String) {
+class Commission(var name: String,
+                 var year: Int,
+                 var semester: Int,
+                 var classTime: String) {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null

@@ -13,7 +13,7 @@ class SubjectInscriptionIntention (var option:SubjectIntentionOption
     var subject:Subject? = null
 
     @OneToOne(cascade = arrayOf(CascadeType.MERGE))
-    var commision: Commision? =null
+    var commission: Commission? =null
 
     @OneToOne(cascade = arrayOf(CascadeType.MERGE))
     val student: User? = null

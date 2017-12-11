@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 
 
 @Service
-class UserService {
+class SubjectService {
 
     @Autowired
     lateinit var studRepo: UserRepository

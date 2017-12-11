@@ -1,12 +1,13 @@
 package ar.edu.unq.eiroalando.persistence
 
-import ar.edu.unq.eiroalando.model.Commision
+import ar.edu.unq.eiroalando.model.Commission
 import org.springframework.data.repository.CrudRepository
 
 
-interface ComissionRepository :CrudRepository<Commision,Long> {
+interface CommissionRepository :CrudRepository<Commission,Long> {
 
-    fun findByName(name: String): Commision
+    fun findById(id: Long): Commission
 
-    fun findBySubjectId(subjectId: Long): Commision
+    fun findByName(name: String): Commission
+
 }

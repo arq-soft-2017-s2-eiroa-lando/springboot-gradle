@@ -50,8 +50,8 @@ open class Application {
 @EnableWebMvc
 open class WebConfig : WebMvcConfigurerAdapter() {
     override fun addCorsMappings(registry: CorsRegistry?) {
-        registry!!.addMapping("/**")
-                .allowedOrigins("http://localhost:4200")
+        registry!!.addMapping("*")
+                .allowedOrigins("http://localhost:4200","http://localhost:8080")
                 .allowedMethods("PUT", "DELETE", "GET", "POST")
                 .allowCredentials(false).maxAge(3600)
     }

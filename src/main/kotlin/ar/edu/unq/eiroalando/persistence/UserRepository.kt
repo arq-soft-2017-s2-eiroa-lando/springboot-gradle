@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository
 
 interface UserRepository :CrudRepository<User,Long> {
 
+    fun findById(id: Long): User
+
     fun findByName(name: String): User
 
     fun findByStudentFileNumber(fileNumber: Int?): User
