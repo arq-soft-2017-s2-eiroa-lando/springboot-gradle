@@ -3,6 +3,9 @@ package application.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,6 +58,7 @@ public class SurveyController {
 	@GetMapping(value="statistics", produces="application/json")
 	public SurveyStatistics getStatistics() {
 		Survey s = this.getCurrentSurvey();
+		if(s == null) return null;
 		Iterable<StudentSurvey> answers = this.getStudentSurveys();
 		
 		return new SurveyStatistics(s, answers);
