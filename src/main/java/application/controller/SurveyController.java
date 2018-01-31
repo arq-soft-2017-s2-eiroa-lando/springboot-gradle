@@ -33,10 +33,10 @@ public class SurveyController {
 	    return service.find();
 	}
 	
-	@GetMapping(value="student-surveys" , produces="application/json")
-	public @ResponseBody Iterable<StudentSurvey> getStudentSurveys() {
-	    return service.findAllStudentSurveys();
-	}
+//	@GetMapping(value="student-surveys" , produces="application/json")
+//	public @ResponseBody Iterable<StudentSurvey> getStudentSurveys() {
+//	    return service.findAllStudentSurveys();
+//	}
 	
 	@GetMapping(value="student-survey/{surveyHash}" , produces="application/json")
 	public @ResponseBody StudentSurvey getStudentSurvey(@PathVariable("surveyHash") int surveyHash) {
@@ -56,11 +56,7 @@ public class SurveyController {
 	}
 	
 	@GetMapping(value="statistics", produces="application/json")
-	public SurveyStatistics getStatistics() {
-		Survey s = this.getCurrentSurvey();
-		if(s == null) return null;
-		Iterable<StudentSurvey> answers = this.getStudentSurveys();
-		
-		return new SurveyStatistics(s, answers);
+	public List<SurveyStatistics> getStatistics() {
+		return service.getAllSurveyStatistics();
 	}
 }

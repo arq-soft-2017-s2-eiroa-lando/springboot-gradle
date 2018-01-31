@@ -8,6 +8,6 @@ public interface StudentSurveyRepository extends CrudRepository<StudentSurvey, L
 
 	StudentSurvey findBySurveyHash(int surveyHash);
 	
-
+	Iterable<StudentSurvey> findBySurveyID(Long surveyID);
 	
 }

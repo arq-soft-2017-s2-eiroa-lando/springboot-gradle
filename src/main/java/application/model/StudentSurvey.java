@@ -15,12 +15,19 @@ public class StudentSurvey {
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO) private Long id;
 	private int surveyHash;
+	private Long surveyID;
 	private String email;
 	private String period;
 	private String comment;
 	@OneToMany(cascade= {CascadeType.ALL}) private List<Subject> subjects;
 	private boolean completed;
 	
+	public Long getSurveyID() {
+		return surveyID;
+	}
+	public void setSurveyID(Long surveyID) {
+		this.surveyID = surveyID;
+	}
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -65,7 +72,8 @@ public class StudentSurvey {
 		this.email = email;
 	}
 
-	public StudentSurvey(String email, String period, String comment, List<Subject> subjects) {
+	public StudentSurvey(Long surveyID, String email, String period, String comment, List<Subject> subjects) {
+		this.surveyID = surveyID;
 		this.surveyHash = getSaltString().hashCode();
 		this.email = email;
 		this.period = period;

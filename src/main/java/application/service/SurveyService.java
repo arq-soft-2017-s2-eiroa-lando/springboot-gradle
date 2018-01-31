@@ -2,6 +2,7 @@ package application.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import application.controller.dto.Answer;
 import application.model.StudentSurvey;
 import application.model.Subject;
 import application.model.Survey;
+import application.model.SurveyStatistics;
 import application.persistence.StudentSurveyRepository;
 import application.persistence.SurveyRepository;
 
@@ -28,22 +30,21 @@ public class SurveyService {
 		return null;
 	}
 
-	public Iterable<StudentSurvey> findAllStudentSurveys(){
-		return studentR.findAll();
+	private Iterable<StudentSurvey> findAllStudentSurveys(Long surveyId) {
+		return studentR.findBySurveyID(surveyId);
 	}
 	
 	public void save(Survey s) {
-		surveyR.save(s);
+		Survey persistedSurvey = surveyR.save(s);
 		
-		//Crear todas las encuestas para los alumnos
+		//Crea todas las encuestas para los alumnos
 		List<StudentSurvey> surveys = new ArrayList<StudentSurvey>();
 		for( String email : s.getEmails().split(",") ) {
 			List<Subject> subjects = cloneSubjects(s.getSubjects());
-			StudentSurvey ss = new StudentSurvey(email, s.getPeriod(), s.getComment(), subjects);
+			StudentSurvey ss = new StudentSurvey(persistedSurvey.getId(), email, s.getPeriod(), s.getComment(), subjects);
 			surveys.add(ss);
 		}
 		studentR.save(surveys);
-				
 	}
 
 	/**
@@ -75,4 +76,21 @@ public class SurveyService {
 		s.setIncrementCompletedSurveys();
 		surveyR.save(s);
 	}
+
+	public List<SurveyStatistics> getAllSurveyStatistics() {
+		List<SurveyStatistics> allStatistics = new LinkedList<SurveyStatistics>();
+		
+		Iterable<Survey> allSurveys = this.surveyR.findAll();
+		Iterator<Survey> it = allSurveys.iterator();
+		while(it.hasNext()) {
+			Survey s = it.next();
+			Iterable<StudentSurvey> surveys = findAllStudentSurveys(s.getId());
+			SurveyStatistics stat = new SurveyStatistics(s, surveys);
+			allStatistics.add(stat);
+		}
+		
+		return allStatistics;
+	}
+
+	
 }
