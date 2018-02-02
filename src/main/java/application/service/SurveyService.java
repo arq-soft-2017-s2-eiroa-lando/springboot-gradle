@@ -30,7 +30,7 @@ public class SurveyService {
 		return null;
 	}
 
-	private Iterable<StudentSurvey> findAllStudentSurveys(Long surveyId) {
+	public Iterable<StudentSurvey> findAllStudentSurveys(Long surveyId) {
 		return studentR.findBySurveyID(surveyId);
 	}
 	

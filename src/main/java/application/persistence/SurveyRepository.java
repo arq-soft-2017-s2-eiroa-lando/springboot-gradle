@@ -6,5 +6,4 @@ import application.model.Survey;
 
 public interface SurveyRepository extends CrudRepository<Survey, Long> {
 
-	
 }

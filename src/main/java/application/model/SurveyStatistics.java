@@ -9,12 +9,14 @@ import java.util.Map;
 public class SurveyStatistics {
 	
 	private String period;
+	private long surveyID;
 	private int totalSurveys;
 	private int surveysCompleted;
 	private List<StatisticClass> classes;
 	
 	public SurveyStatistics(Survey s, Iterable<StudentSurvey> answers) {
 		this.period = s.getPeriod();
+		this.surveyID = s.getId();
 		this.totalSurveys = s.getTotalSurveys();
 		this.surveysCompleted = s.getCompletedSurveys();
 		
@@ -78,10 +80,19 @@ public class SurveyStatistics {
 	public void setClasses(List<StatisticClass> classes) {
 		this.classes = classes;
 	}
+	
+	public long getSurveyID() {
+		return surveyID;
+	}
 
-	public SurveyStatistics(String period, int totalSurveys, int surveysCompleted, List<StatisticClass> classes) {
+	public void setSurveyID(long surveyID) {
+		this.surveyID = surveyID;
+	}
+
+	public SurveyStatistics(String period, long surveyID, int totalSurveys, int surveysCompleted, List<StatisticClass> classes) {
 		super();
 		this.period = period;
+		this.surveyID = surveyID;
 		this.totalSurveys = totalSurveys;
 		this.surveysCompleted = surveysCompleted;
 		this.classes = classes;

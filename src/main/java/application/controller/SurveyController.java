@@ -28,15 +28,10 @@ public class SurveyController {
 
 	@Autowired SurveyService service;
 	
-	@GetMapping(value="survey" , produces="application/json")
-	public @ResponseBody Survey getCurrentSurvey() {
-	    return service.find();
+	@GetMapping(value="student-surveys/{surveyID}" , produces="application/json")
+	public @ResponseBody Iterable<StudentSurvey> getStudentSurveys(@PathVariable("surveyID") long surveyID) {
+	    return service.findAllStudentSurveys(surveyID);
 	}
-	
-//	@GetMapping(value="student-surveys" , produces="application/json")
-//	public @ResponseBody Iterable<StudentSurvey> getStudentSurveys() {
-//	    return service.findAllStudentSurveys();
-//	}
 	
 	@GetMapping(value="student-survey/{surveyHash}" , produces="application/json")
 	public @ResponseBody StudentSurvey getStudentSurvey(@PathVariable("surveyHash") int surveyHash) {
