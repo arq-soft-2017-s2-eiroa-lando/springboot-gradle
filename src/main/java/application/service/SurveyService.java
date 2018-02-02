@@ -72,7 +72,7 @@ public class SurveyService {
 		survey.setCompleted(true);
 		studentR.save(survey);
 		
-		Survey s = this.find();
+		Survey s = surveyR.findOne(survey.getSurveyID());
 		s.setIncrementCompletedSurveys();
 		surveyR.save(s);
 	}
