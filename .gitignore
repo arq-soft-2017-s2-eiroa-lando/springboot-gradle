@@ -16,7 +16,6 @@
 .recommenders
 .settings
 .springBeans
-/build
 /code
 MANIFEST.MF
 _site/
@@ -33,3 +32,5 @@ overridedb.*
 settings.xml
 target
 transaction-logs
+
+
