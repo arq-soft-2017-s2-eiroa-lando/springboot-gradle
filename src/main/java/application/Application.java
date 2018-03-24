@@ -33,6 +33,7 @@ public class Application {
 	          .apis(RequestHandlerSelectors.basePackage("application.controller"))              
 	          .paths(PathSelectors.any())                          
 	          .build()
+	          .useDefaultResponseMessages(false)
 	          .apiInfo(apiInfo());                                           
 	    }
 	    

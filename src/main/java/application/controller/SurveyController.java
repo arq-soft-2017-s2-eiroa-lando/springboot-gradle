@@ -12,6 +12,7 @@ import application.model.Survey;
 import application.service.SurveyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("api" + "/survey")
@@ -23,9 +24,9 @@ public class SurveyController {
 	 
 	@PostMapping(consumes="application/json")
 	@ApiOperation(value = "Creates a new survey")
-	public @ResponseBody void newSurvey(@RequestBody Survey s) {
-		s.setTotalSurveys(s.getEmails().split(",").length);
-		service.save(s);
+	public @ResponseBody void newSurvey(@ApiParam(value = "survey", required = true) @RequestBody Survey survey) {
+		survey.setTotalSurveys(survey.getEmails().split(",").length);
+		service.save(survey);
 	}
     	 
 }
