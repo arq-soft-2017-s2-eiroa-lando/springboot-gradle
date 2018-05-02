@@ -84,4 +84,14 @@ public class Survey {
 		}
 	}
 
+	public Survey(String period, String comment, List<Subject> subjects, String emails) {
+		super();
+		this.period = period;
+		this.comment = comment;
+		this.subjects = subjects;
+		this.emails = emails;
+	}
+	
+	
+
 }

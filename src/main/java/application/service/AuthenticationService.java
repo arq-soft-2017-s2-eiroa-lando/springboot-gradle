@@ -20,12 +20,4 @@ public class AuthenticationService {
 		return String.valueOf(System.currentTimeMillis());
 	}
 
-	public boolean isValid(String authToken) throws Exception {
-		//TODO decrypt token and then validate timestamp
-		long now = System.currentTimeMillis();
-		long token = Long.parseLong(authToken);
-		long elapsed = now - token;
-		return elapsed < 3600000; //1h
-	}
-
 }
