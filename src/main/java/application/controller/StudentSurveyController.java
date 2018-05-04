@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import application.model.StudentSurvey;
-import application.service.SurveyService;
+import application.service.StudentSurveyService;
 
 @RestController
 @RequestMapping("api" + "/student-survey")
 @CrossOrigin
 public class StudentSurveyController {
 
-	@Autowired SurveyService service;
+	@Autowired StudentSurveyService service;
 	 
 	@GetMapping(value="/all/{surveyID}" , produces="application/json")
 	public @ResponseBody Iterable<StudentSurvey> getStudentSurveys(@PathVariable("surveyID") long surveyID) {

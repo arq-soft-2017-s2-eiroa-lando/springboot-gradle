@@ -89,9 +89,13 @@ public class Subject {
 		}
 		return list;
 	}
-	
-	
 
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Subject)) return false;
+		Subject s = (Subject) obj;
+		return this.id == s.id && this.name.equals(s.name) && this.classes.equals(s.classes) 
+				&& this.options.equals(s.options) && this.optionChosen.equals(s.optionChosen);
+	}
 	
 }

@@ -20,6 +20,7 @@ import application.model.Subject;
 import application.model.SubjectClass;
 import application.model.Survey;
 import application.persistence.SurveyRepository;
+import utils.SurveyFactory;
 
 @ContextConfiguration(classes = Application.class)
 @RunWith(SpringRunner.class)
@@ -34,18 +35,7 @@ public class SurveyRepositoryTest {
 	
 	@Test
 	public void saveSurvey() {
-		List<Subject> subjects = new ArrayList<Subject>();
-		List<SubjectClass> classes = new ArrayList<SubjectClass>();
-		List<String> schedules = new ArrayList<String>();
-		schedules.add("Jueves 20-24hs");
-	    SubjectClass sc = new SubjectClass("C1", "Cacho", 20, schedules);
-	    classes.add(sc);
-		List<String> options = new ArrayList<String>();
-		options.add("Cursaria en C1");
-		options.add("No voy a cursar");
-		Subject subject = new Subject("Matematica 1", classes, options, "");
-	    subjects.add(subject);
-		Survey survey = new Survey("1er cuatrimestre 2018", "fecha de cierre 20/03", subjects, "email@email.com,email2@email.com");
+		Survey survey = SurveyFactory.createSurvey();
 	    entityManager.persist(survey);
 	    entityManager.flush();
 	 

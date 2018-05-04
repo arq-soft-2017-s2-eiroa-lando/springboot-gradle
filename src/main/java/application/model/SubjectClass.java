@@ -80,7 +80,14 @@ public class SubjectClass {
 		list.addAll(schedules);
 		return list;
 	}
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof SubjectClass)) return false;
+		SubjectClass s = (SubjectClass) obj;
+		
+		return this.id == s.id && this.name.equals(s.name) && this.teachers.equals(s.teachers) &&
+				this.size == s.size && this.schedules.equals(s.schedules);
+	}
 	
 }

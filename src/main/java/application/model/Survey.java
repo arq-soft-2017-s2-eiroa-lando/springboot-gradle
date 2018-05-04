@@ -91,7 +91,15 @@ public class Survey {
 		this.subjects = subjects;
 		this.emails = emails;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Survey)) return false;
+		Survey s = (Survey) obj;
+		return this.id == s.id && this.period.equals(s.period) && this.comment.equals(s.comment) &&
+				this.subjects.equals(s.subjects) && this.emails.equals(s.emails) && 
+				this.completedSurveys == s.completedSurveys && this.totalSurveys == s.totalSurveys;
+	}
 	
 
 }
