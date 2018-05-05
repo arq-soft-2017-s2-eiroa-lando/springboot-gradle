@@ -26,5 +26,14 @@ public class SurveyFactory {
 		s.setId(1l);
 		return s;
 	}
+
+	public static Survey createSurveyWithoutIDs() {
+		Survey s = createSurvey();
+		s.setId(null);
+		for(Subject subj : s.getSubjects()) {
+			subj.setId(null);
+		}
+		return s;
+	}
 	
 }

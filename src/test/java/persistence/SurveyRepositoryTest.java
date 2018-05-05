@@ -35,7 +35,7 @@ public class SurveyRepositoryTest {
 	
 	@Test
 	public void saveSurvey() {
-		Survey survey = SurveyFactory.createSurvey();
+		Survey survey = SurveyFactory.createSurveyWithoutIDs();
 	    entityManager.persist(survey);
 	    entityManager.flush();
 	 
