@@ -1,0 +1,30 @@
+{
+  "comment": "completar esta encuesta...",
+  "completedSurveys": 0,
+  "emails": "lucas@gmail.com,lando@gmail.com",
+  "id": 0,
+  "period": "1er cuatrimestre",
+  "subjects": [
+    {
+      "classes": [
+        {
+          "id": 0,
+          "name": "C1",
+          "schedules": [
+            "Jueves 20hs"
+          ],
+          "size": 20,
+          "teachers": "pepe"
+        }
+      ],
+      "id": 0,
+      "name": "Mate 1",
+      "optionChosen": "",
+      "options": [
+        "Aun no voy a cursar",
+        "Ya aprobe"
+      ]
+    }
+  ],
+  "totalSurveys": 0
+}

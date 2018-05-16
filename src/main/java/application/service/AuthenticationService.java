@@ -14,6 +14,9 @@ public class AuthenticationService {
 	@Autowired UserRepository userRepository;
 	
 	public String authenticate(String user, String pass) throws Exception {
+	    Iterable<User> all = userRepository.findAll();
+	    
+	    
 		User aUser = userRepository.findByUsername(user);
 		if(aUser == null) throw new AuthenticationException();
 		

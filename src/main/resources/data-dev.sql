@@ -1,1 +1,1 @@
-insert into User values ("")
+insert into User (id, username, password) values (1, 'user' , '$2a$10$9qwBauxOTVWsVuFZbCgPz.V64BJu/CetakLyDx1RTfPJ4DRlD1CDS'); 
