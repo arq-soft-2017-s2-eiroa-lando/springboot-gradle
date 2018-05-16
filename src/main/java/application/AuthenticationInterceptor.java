@@ -12,7 +12,10 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String authToken = request.getHeader("auth-token");
-		if (authToken == null) return false;
+		if (authToken == null) {
+		    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+		    return false;
+		}
 		try {
 			if(isValid(authToken)) {
 				return true;

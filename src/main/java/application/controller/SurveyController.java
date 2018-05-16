@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
-@RequestMapping("api" + "/survey")
+@RequestMapping("/api/survey")
 @CrossOrigin
 @Api(value="Surveys")
 public class SurveyController {
@@ -28,5 +28,5 @@ public class SurveyController {
 		survey.setTotalSurveys(survey.getEmails().split(",").length);
 		service.save(survey);
 	}
-    	 
+	
 }

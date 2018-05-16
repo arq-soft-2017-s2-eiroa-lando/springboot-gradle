@@ -1,30 +1,53 @@
 {
-  "comment": "completar esta encuesta...",
+  "comment": "Encuesta de prueba automatica",
   "completedSurveys": 0,
-  "emails": "lucas@gmail.com,lando@gmail.com",
-  "id": 0,
-  "period": "1er cuatrimestre",
+  "emails": "lucas@gmail.com",
+  "period": "1er cuatrimestre 2010",
   "subjects": [
     {
       "classes": [
         {
-          "id": 0,
           "name": "C1",
           "schedules": [
             "Jueves 20hs"
           ],
           "size": 20,
           "teachers": "pepe"
-        }
+        },
+	{
+	  "name": "C2",
+          "schedules": [
+	    "Jueves 10hs","Viernes 10hs"
+	  ] 
+	}
       ],
-      "id": 0,
       "name": "Mate 1",
       "optionChosen": "",
       "options": [
         "Aun no voy a cursar",
-        "Ya aprobe"
+        "Ya aprobe",
+	"Cursaria en C1",
+        "Cursaria en C2"
+      ]
+    },
+    {
+      "classes": [
+        {
+          "name": "C1",
+          "schedules": [
+            "Lunes 09hs"
+          ],
+          "size": 10,
+          "teachers": "pepita"
+        }
+      ],
+      "name": "Orga",
+      "optionChosen": "",
+      "options": [
+        "Aun no voy a cursar",
+        "Ya aprobe",
+        "Cursaria en C1"
       ]
     }
-  ],
-  "totalSurveys": 0
+  ]
 }
