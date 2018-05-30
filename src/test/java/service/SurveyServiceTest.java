@@ -44,14 +44,6 @@ public class SurveyServiceTest {
 	}
 	
 	@Test
-	public void find() {
-		List<Survey> surveys = new ArrayList<Survey>();
-		when(surveyRepository.findAll()).thenReturn(surveys);
-		service.find();
-		verify(surveyRepository).findAll();
-	}
-	
-	@Test
 	public void saveAnswer() {
 		List<Answer> answers = new ArrayList<Answer>();
 		Answer a = new Answer(1,"Cursaria en C1");

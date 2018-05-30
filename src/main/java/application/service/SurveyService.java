@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,22 +21,18 @@ public class SurveyService {
 
 	@Autowired private SurveyRepository surveyR;
 	@Autowired private StudentSurveyService studentSurveyService;
-	
-	public Survey find() {
-		Iterator<Survey> i = surveyR.findAll().iterator();
-		if(i.hasNext()) {
-			return i.next();
-		}
-		return null;
-	}
 
+    private static final Logger log = LoggerFactory.getLogger(SurveyService.class); 
+	
 	public void save(Survey s) {
+	    log.info("Saving survey for period: " + s.getPeriod());
 		Survey persistedSurvey = surveyR.save(s);
 		studentSurveyService.createStudentSurveys(persistedSurvey);
 	}
 	
 
 	public void saveAnswer(int surveyHash, List<Answer> answers) {
+	    log.info("Saving answers for hash " + surveyHash); 
 		StudentSurvey survey = studentSurveyService.findStudentSurvey(surveyHash);
 		for(Answer a : answers) {
 			Subject s = survey.getSubject(a.getId());
@@ -49,6 +47,7 @@ public class SurveyService {
 	}
 
 	public List<SurveyStatistics> getAllSurveyStatistics() {
+	    log.info("Getting survey statistics");
 		List<SurveyStatistics> allStatistics = new LinkedList<SurveyStatistics>();
 		
 		Iterable<Survey> allSurveys = this.surveyR.findAll();
