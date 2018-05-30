@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ public class Survey {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO) private Long id;
 	private String period;
 	private String comment;
-	@OneToMany(cascade= {CascadeType.ALL}) private List<Subject> subjects;
+	@OneToMany(fetch = FetchType.EAGER, cascade= {CascadeType.ALL}) private List<Subject> subjects;
 	private String emails;
 	private int completedSurveys;
 	private int totalSurveys;
@@ -100,6 +101,20 @@ public class Survey {
 				this.subjects.equals(s.subjects) && this.emails.equals(s.emails) && 
 				this.completedSurveys == s.completedSurveys && this.totalSurveys == s.totalSurveys;
 	}
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Period: " + this.period + "\n");
+        sb.append("Comment: " + this.comment + "\n");
+        sb.append("Emails: " + this.emails + "\n");
+        sb.append("Completed surveys: " + this.completedSurveys + "/" + this.totalSurveys + "\n");
+        sb.append("Subjects: " + this.subjects.toString());
+
+        return sb.toString();
+    }
+	
+	
 	
 
 }

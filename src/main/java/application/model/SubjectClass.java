@@ -13,81 +13,93 @@ import javax.persistence.Id;
 @Entity
 public class SubjectClass {
 
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	private String name;
-	private String teachers;
-	private int size;	
-	@ElementCollection @Column(name="schedule") private List<String> schedules;
-	
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+    private String teachers;
+    private int size;
+    @ElementCollection
+    @Column(name = "schedule")
+    private List<String> schedules;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getTeachers() {
-		return teachers;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setTeachers(String teachers) {
-		this.teachers = teachers;
-	}
+    public String getTeachers() {
+        return teachers;
+    }
 
-	public int getSize() {
-		return size;
-	}
+    public void setTeachers(String teachers) {
+        this.teachers = teachers;
+    }
 
-	public void setSize(int size) {
-		this.size = size;
-	}
+    public int getSize() {
+        return size;
+    }
 
-	
-	public List<String> getSchedules() {
-		return schedules;
-	}
+    public void setSize(int size) {
+        this.size = size;
+    }
 
-	public void setSchedules(List<String> schedules) {
-		this.schedules = schedules;
-	}
+    public List<String> getSchedules() {
+        return schedules;
+    }
 
-	public SubjectClass() {}
+    public void setSchedules(List<String> schedules) {
+        this.schedules = schedules;
+    }
 
-	public SubjectClass(String name, String teachers, int size, List<String> schedules) {
-		this.name = name;
-		this.teachers = teachers;
-		this.size = size;
-		this.schedules = schedules;
-	}
+    public SubjectClass() {
+    }
 
-	public SubjectClass cloneClass() {
-		return new SubjectClass(name, teachers, size, cloneSchedules());
-	}
+    public SubjectClass(String name, String teachers, int size, List<String> schedules) {
+        this.name = name;
+        this.teachers = teachers;
+        this.size = size;
+        this.schedules = schedules;
+    }
 
-	private List<String> cloneSchedules() {
-		List<String> list = new ArrayList<String>();
-		list.addAll(schedules);
-		return list;
-	}
+    public SubjectClass cloneClass() {
+        return new SubjectClass(name, teachers, size, cloneSchedules());
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof SubjectClass)) return false;
-		SubjectClass s = (SubjectClass) obj;
-		
-		return this.id == s.id && this.name.equals(s.name) && this.teachers.equals(s.teachers) &&
-				this.size == s.size && this.schedules.equals(s.schedules);
-	}
-	
+    private List<String> cloneSchedules() {
+        List<String> list = new ArrayList<String>();
+        list.addAll(schedules);
+        return list;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof SubjectClass))
+            return false;
+        SubjectClass s = (SubjectClass) obj;
+
+        return this.id == s.id && this.name.equals(s.name) && this.teachers.equals(s.teachers) && this.size == s.size
+                && this.schedules.equals(s.schedules);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" =====================" + "\n");
+        sb.append("   - Class name: " + this.name + "\n");
+        
+        return sb.toString();
+    }
+
 }

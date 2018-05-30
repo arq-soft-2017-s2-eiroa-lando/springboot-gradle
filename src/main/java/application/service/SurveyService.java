@@ -33,7 +33,11 @@ public class SurveyService {
 
 	public void saveAnswer(int surveyHash, List<Answer> answers) {
 	    log.info("Saving answers for hash " + surveyHash); 
-		StudentSurvey survey = studentSurveyService.findStudentSurvey(surveyHash);
+		boolean isEdit = false;
+	    StudentSurvey survey = studentSurveyService.findStudentSurvey(surveyHash);
+		if(survey.isCompleted()) {
+		    isEdit = true;
+		}
 		for(Answer a : answers) {
 			Subject s = survey.getSubject(a.getId());
 			s.setOptionChosen(a.getOption());
@@ -41,9 +45,11 @@ public class SurveyService {
 		survey.setCompleted(true);
 		studentSurveyService.save(survey);
 		
-		Survey s = surveyR.findOne(survey.getSurveyID());
-		s.setIncrementCompletedSurveys();
-		surveyR.save(s);
+		if(!isEdit) { 
+		    Survey s = surveyR.findOne(survey.getSurveyID());
+		    s.setIncrementCompletedSurveys(); 
+		    surveyR.save(s);
+		}
 	}
 
 	public List<SurveyStatistics> getAllSurveyStatistics() {

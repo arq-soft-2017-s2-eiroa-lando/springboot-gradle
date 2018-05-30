@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class StudentSurvey {
 	private String email;
 	private String period;
 	private String comment;
-	@OneToMany(cascade= {CascadeType.ALL}) private List<Subject> subjects;
+	@OneToMany(fetch = FetchType.EAGER, cascade= {CascadeType.ALL}) private List<Subject> subjects;
 	private boolean completed;
 	
 	public Long getSurveyID() {

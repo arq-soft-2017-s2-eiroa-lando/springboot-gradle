@@ -37,8 +37,8 @@ public class SurveyStatistics {
 			if(answer.isCompleted()) {
 				for( Subject answerSubject : answer.getSubjects()) {
 					String option = answerSubject.getOptionChosen();
-					//TODO está manera de mapear opciones a comisiones es fea, y tampoco se contabilizan las otras opciones elegidas.
-					if(option.contains("Cursaría en ")) {
+					//TODO estï¿½ manera de mapear opciones a comisiones es fea, y tampoco se contabilizan las otras opciones elegidas.
+					if(option.contains("Cursaria en ")) {
 						String className = option.substring(12, option.length());
 						map.get(answerSubject.getName()+className).incEnrolled();
 					}

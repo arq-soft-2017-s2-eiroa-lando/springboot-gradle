@@ -26,7 +26,7 @@ public class StudentSurveyService {
 	}
 	
 	public void createStudentSurveys(Survey s) {
-	    log.info("Creating all studenti surveys for survey " + s.getPeriod());
+	    log.info("Creating all student surveys for survey " + s.getPeriod());
 	    
 		//Crea todas las encuestas para los alumnos
 		List<StudentSurvey> surveys = new ArrayList<StudentSurvey>();

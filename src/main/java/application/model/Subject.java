@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class Subject {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
-	@OneToMany(cascade= {CascadeType.ALL}) private List<SubjectClass> classes;
+	@OneToMany(fetch = FetchType.EAGER, cascade= {CascadeType.ALL}) private List<SubjectClass> classes;
 	@ElementCollection @Column(name="options") private List<String> options;
 	private String optionChosen;
 	
@@ -97,5 +98,17 @@ public class Subject {
 		return this.id == s.id && this.name.equals(s.name) && this.classes.equals(s.classes) 
 				&& this.options.equals(s.options) && this.optionChosen.equals(s.optionChosen);
 	}
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" =====================" + "\n");
+        sb.append(" - Name: " + this.name + "\n");
+        sb.append(" - Classes: " + this.classes.toString() + "\n");
+        
+        return sb.toString();
+    }
+	
+	
 	
 }
