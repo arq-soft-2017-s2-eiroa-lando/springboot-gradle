@@ -1,5 +1,9 @@
 package application.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.common.collect.Lists;
 
 import application.model.StudentSurvey;
 import application.service.StudentSurveyService;
@@ -26,6 +32,17 @@ public class StudentSurveyController {
 	@GetMapping(value="{surveyHash}" , produces="application/json")
 	public @ResponseBody StudentSurvey getStudentSurvey(@PathVariable("surveyHash") int surveyHash) {
 	    return service.findStudentSurvey(surveyHash);
+	}
+	
+	@GetMapping(value="/hashes/{surveyID}", produces="application/json")
+	public @ResponseBody List<Integer> getSurveyHashes(@PathVariable("surveyID") long surveyID) {
+		
+		Iterator<StudentSurvey> surveys = service.findAllStudentSurveys(surveyID).iterator();
+		List<Integer> hashes = new ArrayList<Integer>();
+		while (surveys.hasNext()) {
+			hashes.add(surveys.next().getSurveyHash());
+		}
+		return hashes;
 	}
 	
 }

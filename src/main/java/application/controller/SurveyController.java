@@ -24,9 +24,10 @@ public class SurveyController {
 	 
 	@PostMapping(consumes="application/json")
 	@ApiOperation(value = "Creates a new survey")
-	public @ResponseBody void newSurvey(@ApiParam(value = "survey", required = true) @RequestBody Survey survey) {
+	public @ResponseBody Long newSurvey(@ApiParam(value = "survey", required = true) @RequestBody Survey survey) {
 		survey.setTotalSurveys(survey.getEmails().split(",").length);
 		service.save(survey);
+		return survey.getId();
 	}
 	
 }

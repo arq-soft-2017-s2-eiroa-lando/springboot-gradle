@@ -1,4 +1,5 @@
-description = 'Software arquitecture 1. Lando Eiroa.'
+description = 'Software arquitecture 1. Lando.'
+
 
 buildscript {
 	repositories {
