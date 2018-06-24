@@ -2,6 +2,8 @@
 
 DEBUG="true"
 
+. ./create_survey.sh --source-only
+
 function logDebug {
   if [ $DEBUG == "true" ]; then
     echo "$1"
@@ -18,17 +20,6 @@ function getStatistics {
   log "Survey statistics: $STATISTICS"
 }
 
-function getAuthToken {
-  logDebug "Authenticating user to get token"
-  AUTH_TOKEN=`curl -X POST "http://localhost:8080/api/auth" -H "Content-Type: application/json" -d "@auth.json"`
-  logDebug "token obtained is: $AUTH_TOKEN "
-}
-
-function createSurvey {
-  getAuthToken
-  logDebug "Creating survey"
-  curl -X POST "http://localhost:8080/api/survey" -H "auth-token: $AUTH_TOKEN" -H "Content-Type: application/json" -d "@create_survey.json"
-}
 
 function answerSurvey {
   logDebug "Getting survey hashes"
@@ -47,10 +38,13 @@ function answerSurvey {
   done
 }
 
-createSurvey
-answerSurvey
-getStatistics
+emails="lucas,pepe,jose"
 
-logDebug "Exiting"
+createSurvey $emails
+
+#answerSurvey
+#getStatistics
+
+logDebug "Finished"
 exit 0
 

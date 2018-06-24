@@ -34,15 +34,4 @@ public class StudentSurveyController {
 	    return service.findStudentSurvey(surveyHash);
 	}
 	
-	@GetMapping(value="/hashes/{surveyID}", produces="application/json")
-	public @ResponseBody List<Integer> getSurveyHashes(@PathVariable("surveyID") long surveyID) {
-		
-		Iterator<StudentSurvey> surveys = service.findAllStudentSurveys(surveyID).iterator();
-		List<Integer> hashes = new ArrayList<Integer>();
-		while (surveys.hasNext()) {
-			hashes.add(surveys.next().getSurveyHash());
-		}
-		return hashes;
-	}
-	
 }
